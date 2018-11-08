@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './index.css'
 import { CSSTransition } from 'react-transition-group'
 import logo from '../../statics/nav-logo.png'
@@ -25,21 +25,21 @@ const headerUI = (props) => {
         <div className="container">
           <div className="navbar">
             <ul className="navbar_nav clearfix">
-              <li className="left active"><a href="">首页</a></li>
-              <li className="left"><a href="">下载App</a></li>
-              <li className={props.focused ? "left search searchFocus" : "left search" }
-                onFocus={ props.handleSearchFocus }
-                onBlur={ props.handleSearchFocus }
+              <li className="left active"><a href="/">首页</a></li>
+              <li className="left"><a href="/">下载App</a></li>
+              <li className={focused ? "left search searchFocus" : "left search" }
+                onFocus={ handleSearchFocus }
+                onBlur={ handleSearchFocus }
                 >
-                <CSSTransition in={props.focused} timeout={500} classNames="slide" >
+                <CSSTransition in={focused} timeout={500} classNames="slide" >
                   <input type="text" placeholder="搜索" />
                 </CSSTransition>
-                <a href="">
+                <a href="/">
                   <i className="iconfont">&#xe626;</i>
                 </a>
               </li>
-              <li className="right"><a href="">登录</a></li>
-              <li className="right"><a href=""><i className="iconfont">&#xe607;</i></a></li>
+              <li className="right"><a href="/">登录</a></li>
+              <li className="right"><a href="/"><i className="iconfont">&#xe607;</i></a></li>
             </ul>
           </div>
         </div>
