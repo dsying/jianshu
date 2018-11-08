@@ -1,11 +1,10 @@
-import React,{Component} from 'react'
 import { connect } from 'react-redux'
 import headerUI from './headerUI'
 
 
 const mapStateToProps = state => {
   return {
-    focused: state.focused
+    focused: state.header.focused
   }
 }
 
