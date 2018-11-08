@@ -1,0 +1,1 @@
+export const SEARCH_FOCUSED = 'header_search_focused'

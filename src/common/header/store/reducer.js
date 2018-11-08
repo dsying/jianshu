@@ -1,15 +1,16 @@
+import { constant } from './index'
 const initState = {
     focused: false
 }
 
-function reducer(prevState = initState, action) {
+function reducer(state = initState, action) {
     switch (action.type) {
-        case 'search_input_focused':
-            return Object.assign({}, prevState, {
-                focused: !prevState.focused
+        case constant.SEARCH_FOCUSED:
+            return Object.assign({}, state, {
+                focused: !state.focused
             })
         default:
-            return prevState
+            return state
     }
 }
 

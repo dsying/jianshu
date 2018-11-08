@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import headerUI from './headerUI'
-
+import { constant } from './store'
 
 const mapStateToProps = state => {
   return {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
       handleSearchFocus: () => {
-        const action = {type: 'search_input_focused'}
+        const action = {type: constant.SEARCH_FOCUSED}
         dispatch(action)
       }
 
