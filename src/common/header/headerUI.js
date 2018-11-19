@@ -3,39 +3,55 @@ import './index.css'
 import { CSSTransition } from 'react-transition-group'
 import logo from '../../statics/nav-logo.png'
 
-const getListArea = (show,list) => {
-  if(show){
-    return (
-      <div id="navbar-search-tips">
-        <div className="search-trending">
-          <div className="search-trending-header">
-            <span>热门搜索</span>
-            <a href="/">换一批</a>
-          </div>
-          <div className="search-trending-wrap">
-            <ul>
-              {
-                list.map((n, i, arr) => {
-                  return (
-                    <li key={i}>
-                      <a href="/">{n}</a>
-                    </li>
-                  )
-                })
-              }
 
-            </ul>
-          </div>
-        </div>
-      </div>
-    )
-  }else {
-    return null
-  }
-}
 
 const headerUI = (props) => {
-  const { focused, list = [], handleSearchFocus, handleSearchBlur } = props
+  const {
+    focused,
+    mouseIn,
+    list = [],
+    page,
+    handleSearchFocus,
+    handleSearchBlur,
+    handleSearchMouseEnter,
+    handleSearchMouseLeave,
+    handleSearchTipsChange
+  } = props
+  const getListArea = () => {
+    let pageList = []
+    for (let i = (page - 1) * 10; i < (page * 10) && i < list.length; i++) {
+      pageList = [...pageList, list[i]]
+    }
+    if (focused || mouseIn) {
+      return (
+        <div id="navbar-search-tips" onMouseEnter={ handleSearchMouseEnter } onMouseLeave={ handleSearchMouseLeave }>
+          <div className="search-trending">
+            <div className="search-trending-header">
+              <span>热门搜索</span>
+              <a  href="/" onClick={handleSearchTipsChange}>换一批</a>
+            </div>
+            <div className="search-trending-wrap">
+              <ul>
+                {
+
+                  pageList.map((n, i, arr) => {
+                    return (
+                      <li key={i}>
+                        <a href="/">{n}</a>
+                      </li>
+                    )
+                  })
+                }
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      )
+    }else {
+      return null
+    }
+  }
   return (
     <nav className="header_wrapper">
       <div className="width_limit clearfix">
@@ -68,7 +84,9 @@ const headerUI = (props) => {
                 <a href="/">
                   <i className="iconfont">&#xe626;</i>
                 </a>
-                {getListArea(focused, list)}
+                {
+                  getListArea()
+                }
               </li>
               <li className="right"><a href="/">登录</a></li>
               <li className="right"><a href="/"><i className="iconfont">&#xe607;</i></a></li>

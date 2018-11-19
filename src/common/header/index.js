@@ -1,36 +1,41 @@
 import { connect } from 'react-redux'
 import headerUI from './headerUI'
-import { constant } from './store'
+import { Actions } from './store'
 import axios from 'axios'
 
 const mapStateToProps = state => {
   return {
     focused: state.get('header').get('focused'),
-    list: state.get('header').get('list')
+    mouseIn: state.get('header').get('mouseIn'),
+    list: state.get('header').get('list'),
+    page: state.get('header').get('page')
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
       handleSearchFocus: () => {
-        const action = {type: constant.SEARCH_FOCUSED}
-        dispatch(action)
+        dispatch(Actions.searchFocus())
         dispatch((dispatch) => {
           axios.get('./api/headerList.json')
             .then((res) => {
-              dispatch({
-                type: constant.SEARCH_LIST,
-                data: res.data
-              })
+              dispatch(Actions.changeList(res))
             })
             .catch((err) => {})
         })
       },
       handleSearchBlur: () => {
-        const action = {
-          type: constant.SEARCH_BLUR
-        }
-        dispatch(action)
+        dispatch(Actions.searchBlur())
+      },
+      handleSearchMouseEnter(){
+        dispatch(Actions.mouseEnter())
+      },
+      handleSearchMouseLeave() {
+        dispatch(Actions.mouseLeave())
+      },
+      handleSearchTipsChange(e) {
+        e.preventDefault();
+        dispatch(Actions.tipsChange())
       }
   }
 }
