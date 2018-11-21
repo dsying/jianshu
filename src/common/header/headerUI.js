@@ -28,7 +28,10 @@ const headerUI = (props) => {
           <div className="search-trending">
             <div className="search-trending-header">
               <span>热门搜索</span>
-              <a  href="/" onClick={handleSearchTipsChange}>换一批</a>
+              <a href="/" onClick={handleSearchTipsChange}>
+                <i className="iconfont spin">&#xe851;</i>
+                换一批
+              </a>
             </div>
             <div className="search-trending-wrap">
               <ul>
@@ -75,7 +78,7 @@ const headerUI = (props) => {
               <li className="left active"><a href="/">首页</a></li>
               <li className="left"><a href="/">下载App</a></li>
               <li className={focused ? "left search searchFocus" : "left search" }
-                onFocus={ handleSearchFocus }
+                onFocus={ () => handleSearchFocus(list) }
                 onBlur={ handleSearchBlur }
                 >
                 <CSSTransition in={focused} timeout={500} classNames="slide" >

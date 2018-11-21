@@ -14,15 +14,20 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      handleSearchFocus: () => {
+      handleSearchFocus: (list) => {
+
         dispatch(Actions.searchFocus())
-        dispatch((dispatch) => {
-          axios.get('./api/headerList.json')
-            .then((res) => {
-              dispatch(Actions.changeList(res))
-            })
-            .catch((err) => {})
-        })
+        if(!list.length){
+          console.log(list)
+          dispatch((dispatch) => {
+            axios.get('./api/headerList.json')
+              .then((res) => {
+                dispatch(Actions.changeList(res))
+              })
+              .catch((err) => {})
+          })
+        }
+
       },
       handleSearchBlur: () => {
         dispatch(Actions.searchBlur())
@@ -34,7 +39,17 @@ const mapDispatchToProps = dispatch => {
         dispatch(Actions.mouseLeave())
       },
       handleSearchTipsChange(e) {
+        //debugger
         e.preventDefault();
+        const el = e.target.firstChild;
+        let originAngle = el.style.transform.replace(/[^0-9]/ig,'')
+        if(originAngle){
+          originAngle = parseInt(originAngle,10)
+        }else{
+          originAngle = 0
+        }
+        el.style.transform = `rotate(${originAngle + 360}deg)`
+
         dispatch(Actions.tipsChange())
       }
   }

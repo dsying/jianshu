@@ -138,6 +138,13 @@ a {text-decoration: none; cursor: pointer;}
   font-size: 13px;
   color: #969696
 }
+.search-trending .search-trending-header a>.spin{
+  display: block;
+  float: left;
+  transition: all .2s;
+  transform: rotate(80deg);
+  transform-origin: center center;
+}
 .search-trending .search-trending-wrap {
   /* height: 128px; */
   /* border: 1px solid green; */
